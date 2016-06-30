@@ -70,6 +70,36 @@ func (d *Dictionary) get(name string) (t byte, codec AttributeCodec, ok bool) {
 	return
 }
 
+// Remove removes an attribute from the dictionary by type. It returns an error
+// only if the attribute type does not exist.
+func (d *Dictionary) Remove(t byte) error {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+
+	entry := d.attributesByType[t]
+	if entry == nil {
+		return errors.New("radius: attribute is not registered")
+	}
+	d.attributesByType[t] = nil
+	delete(d.attributesByName, entry.Name)
+	return nil
+}
+
+// RemoveByName removes an attribute from the dictionary by name. It returns an
+// error only if the attribute name does not exist.
+func (d *Dictionary) RemoveByName(name string) error {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+
+	entry, ok := d.attributesByName[name]
+	if !ok {
+		return errors.New("radius: attribute is not registered")
+	}
+	d.attributesByType[entry.Type] = nil
+	delete(d.attributesByName, name)
+	return nil
+}
+
 // Attr returns a new *Attribute whose type is registered under the given
 // name.
 //
