@@ -102,6 +102,18 @@ func (d *Dictionary) RemoveByName(name string) error {
 	return nil
 }
 
+// Entries returns a new slice with a copy of each registered attribute in the
+// dictionary.
+func (d *Dictionary) Entries() []DictionaryEntry {
+	var attrs []DictionaryEntry
+	for _, attr := range d.attributesByType {
+		if attr != nil {
+			attrs = append(attrs, *attr)
+		}
+	}
+	return attrs
+}
+
 // Attr returns a new *Attribute whose type is registered under the given
 // name.
 //
