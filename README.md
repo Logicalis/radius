@@ -1,10 +1,12 @@
-# radius [![GoDoc](https://godoc.org/github.com/layeh/radius?status.svg)](https://godoc.org/github.com/layeh/radius)
+# radius [![GoDoc](https://godoc.org/github.com/PromonLogicalis/radius?status.svg)](https://godoc.org/github.com/PromonLogicalis/radius)
 
-a Go (golang) [RADIUS](https://tools.ietf.org/html/rfc2865) client and server implementation
+A Go (golang) [RADIUS](https://tools.ietf.org/html/rfc2865) client and server implementation.
+
+> This repository is a fork from [https://github.com/layeh/radius](https://github.com/layeh/radius).
 
 ## Installation
 
-    go get -u github.com/layeh/radius
+    go get -u github.com/PromonLogicalis/radius
 
 ## License
 

@@ -5,7 +5,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/layeh/radius"
+	"github.com/PromonLogicalis/radius"
 )
 
 func Test_RFC2865_7_1(t *testing.T) {

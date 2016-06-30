@@ -9,7 +9,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/layeh/radius"
+	"github.com/PromonLogicalis/radius"
 )
 
 var secret = flag.String("secret", "", "shared RADIUS secret between clients and server")

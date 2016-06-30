@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/layeh/radius"
+	"github.com/PromonLogicalis/radius"
 )
 
 const usage = `
