@@ -15,7 +15,9 @@ func initDictionary() {
 	Builtin = &Dictionary{}
 }
 
-type dictEntry struct {
+// DictionaryEntry stores a single mapping between an attribute name, type and
+// AttributeCodec.
+type DictionaryEntry struct {
 	Type  byte
 	Name  string
 	Codec AttributeCodec
@@ -25,8 +27,8 @@ type dictEntry struct {
 // AttributeCodecs.
 type Dictionary struct {
 	mu               sync.RWMutex
-	attributesByType [256]*dictEntry
-	attributesByName map[string]*dictEntry
+	attributesByType [256]*DictionaryEntry
+	attributesByName map[string]*DictionaryEntry
 }
 
 // Register registers the AttributeCodec for the given attribute name and type.
@@ -36,14 +38,14 @@ func (d *Dictionary) Register(name string, t byte, codec AttributeCodec) error {
 		d.mu.Unlock()
 		return errors.New("radius: attribute already registered")
 	}
-	entry := &dictEntry{
+	entry := &DictionaryEntry{
 		Type:  t,
 		Name:  name,
 		Codec: codec,
 	}
 	d.attributesByType[t] = entry
 	if d.attributesByName == nil {
-		d.attributesByName = make(map[string]*dictEntry)
+		d.attributesByName = make(map[string]*DictionaryEntry)
 	}
 	d.attributesByName[name] = entry
 	d.mu.Unlock()
